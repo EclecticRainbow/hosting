@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Testseite – GitHub Pages</title>
+  <meta name="description" content="Einfache Testseite mit PNG, JPG, SVG, HTML und CSS.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" type="image/svg+xml" href="images/logo.svg">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    // Theme vor dem Rendern setzen, damit nichts flackert
+    (function () {
+      var t = localStorage.getItem("theme");
+      if (t) document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+</head>
+<body>
+
+  <a class="skip" href="#inhalt">Zum Inhalt springen</a>
+
+  <header class="site-header">
+    <a class="brand" href="#top">
+      <img src="images/logo.svg" alt="" width="40" height="40">
+      <span>Testseite</span>
+    </a>
+    <nav aria-label="Hauptnavigation">
+      <a href="#ueber">Über</a>
+      <a href="#zahlen">Zahlen</a>
+      <a href="#galerie">Galerie</a>
+      <a href="#kontakt">Kontakt</a>
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Hell/Dunkel umschalten">
+        <span aria-hidden="true">◐</span>
+      </button>
+    </nav>
+  </header>
+
+  <main id="inhalt">
+
+    <section id="top" class="hero">
+      <img class="hero-img" src="images/hero.png" alt="">
+      <div class="hero-overlay"></div>
+      <div class="hero-text">
+        <p class="eyebrow">Statisch · Schnell · Schlicht</p>
+        <h1>Hallo, Welt!</h1>
+        <p class="lead">Eine kleine Beispielseite, gehostet auf GitHub Pages – ganz ohne Build-Schritt.</p>
+        <div class="hero-actions">
+          <a class="button" href="#galerie">Zur Galerie</a>
+          <a class="button ghost" href="#ueber">Mehr erfahren</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="ueber" class="container reveal">
+      <h2>Über diese Seite</h2>
+      <p>
+        Diese Seite besteht nur aus einer HTML-Datei, einem Stylesheet, etwas
+        JavaScript für den Hell/Dunkel-Schalter und drei Bildern in drei Formaten.
+        Sie braucht keine Abhängigkeiten und läuft direkt auf GitHub Pages.
+      </p>
+      <div class="cards">
+        <article class="card"><span class="icon" aria-hidden="true">&lt;/&gt;</span><h3>HTML</h3><p>Semantisch aufgebaut, barrierearm und ohne Frameworks.</p></article>
+        <article class="card"><span class="icon" aria-hidden="true">🎨</span><h3>CSS</h3><p>Responsive mit Grid, Flexbox, Variablen und Dark Mode.</p></article>
+        <article class="card"><span class="icon" aria-hidden="true">🖼</span><h3>Bilder</h3><p>Je eine Datei als PNG, JPG und SVG.</p></article>
+      </div>
+    </section>
+
+    <section id="zahlen" class="container reveal">
+      <h2>Auf einen Blick</h2>
+      <ul class="stats">
+        <li><strong>3</strong><span>Bildformate</span></li>
+        <li><strong>0</strong><span>Abhängigkeiten</span></li>
+        <li><strong>100 %</strong><span>statisch</span></li>
+        <li><strong>1</strong><span>Klick bis online</span></li>
+      </ul>
+    </section>
+
+    <section id="galerie" class="container reveal">
+      <h2>Galerie</h2>
+      <div class="gallery">
+        <figure>
+          <img src="images/hero.png" alt="Abstrakter Farbverlauf mit Kreisen (PNG)" loading="lazy">
+          <figcaption><b>PNG</b> – verlustfrei, gut für Grafiken</figcaption>
+        </figure>
+        <figure>
+          <img src="images/landschaft.jpg" alt="Stilisierte Berglandschaft bei Sonnenuntergang (JPG)" loading="lazy">
+          <figcaption><b>JPG</b> – komprimiert, gut für Fotos</figcaption>
+        </figure>
+        <figure>
+          <img src="images/logo.svg" alt="Logo als Vektorgrafik (SVG)" loading="lazy" class="svg-img">
+          <figcaption><b>SVG</b> – Vektor, beliebig skalierbar</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="kontakt" class="container reveal">
+      <h2>Kontakt</h2>
+      <p>Dies ist nur eine Testseite. Es gibt hier keine echten Kontaktdaten.</p>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 Testseite · Nur zu Demonstrationszwecken · <a href="#top">Nach oben ↑</a></p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

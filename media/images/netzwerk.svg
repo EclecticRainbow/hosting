@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 380" font-family="system-ui, Segoe UI, sans-serif">
+  <style>
+    .k { fill: #1f2433; stroke: #6d8cff; stroke-width: 1.5; }
+    .t { fill: #e8ebf4; font-size: 15px; font-weight: 600; text-anchor: middle; }
+    .s { fill: #98a0b8; font-size: 12px; text-anchor: middle; }
+    .l { fill: none; stroke: #6d8cff; stroke-width: 2; stroke-dasharray: 7 6; animation: fluss 1.4s linear infinite; }
+    .w { stroke: #f0b429; }
+    @keyframes fluss { to { stroke-dashoffset: -13; } }
+    @media (prefers-reduced-motion: reduce) { .l { animation: none; } }
+  </style>
+
+  <path class="l" d="M160 190 H230"/>
+  <path class="l" d="M380 190 H450"/>
+  <path class="l" d="M600 190 C640 190 640 40 700 40"/>
+  <path class="l" d="M600 190 C650 190 650 130 700 130"/>
+  <path class="l" d="M600 190 C650 190 650 220 700 220"/>
+  <path class="l w" d="M380 215 C430 330 620 340 700 310"/>
+
+  <rect class="k" x="10" y="150" width="150" height="80" rx="12"/>
+  <text class="t" x="85" y="186">Internet</text>
+  <text class="s" x="85" y="206">Digi · Bukarest</text>
+
+  <rect class="k" x="230" y="150" width="150" height="80" rx="12"/>
+  <text class="t" x="305" y="186">Router</text>
+  <text class="s" x="305" y="206">192.168.1.1</text>
+
+  <rect class="k" x="450" y="150" width="150" height="80" rx="12"/>
+  <text class="t" x="525" y="186">Switch</text>
+  <text class="s" x="525" y="206">2,5 GbE</text>
+
+  <rect class="k" x="700" y="10" width="240" height="60" rx="12"/>
+  <text class="t" x="820" y="36">MEDIA-PC</text>
+  <text class="s" x="820" y="55">Windows 11 · 192.168.1.20</text>
+
+  <rect class="k" x="700" y="100" width="240" height="60" rx="12"/>
+  <text class="t" x="820" y="126">LG OLED-Fernseher</text>
+  <text class="s" x="820" y="145">192.168.1.31</text>
+
+  <rect class="k" x="700" y="190" width="240" height="60" rx="12"/>
+  <text class="t" x="820" y="216">PlayStation 5</text>
+  <text class="s" x="820" y="235">192.168.1.32</text>
+
+  <rect class="k" x="700" y="280" width="240" height="70" rx="12"/>
+  <text class="t" x="820" y="306">Scanner und Drucker</text>
+  <text class="s" x="820" y="326">WLAN · 192.168.1.40</text>
+</svg>

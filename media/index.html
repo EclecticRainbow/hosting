@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Media</title>
+  <link rel="icon" type="image/svg+xml" href="images/icon.svg">
+  <link rel="stylesheet" href="style.css?v=4">
+</head>
+<body>
+
+  <header class="kopf">
+    <div class="marke"><img src="images/icon.svg" alt="" width="30" height="30"><span>Media</span></div>
+    <nav class="tabs" role="tablist" aria-label="Bereiche">
+      <button role="tab" data-tab="rechner" aria-selected="true">Mein Rechner</button>
+      <button role="tab" data-tab="server" aria-selected="false">Server-Status</button>
+      <button role="tab" data-tab="downloads" aria-selected="false">Download-Status</button>
+    </nav>
+    <div class="stand" id="stand">Stand: –</div>
+  </header>
+
+  <main>
+
+    <!-- Tab 1 -->
+    <section id="rechner" class="panel" role="tabpanel">
+      <div class="titelzeile">
+        <h1>MEDIA-PC</h1>
+        <span class="pille gut">online</span>
+      </div>
+      <p class="unter">Heimrechner · Medienzentrale im Wohnzimmer</p>
+
+      <div class="kacheln">
+        <div class="kachel"><span>Öffentliche IP</span><strong>5.12.64.0</strong><em>Digi Romania · AS8708</em></div>
+        <div class="kachel"><span>Standort</span><strong>Bukarest</strong><em>Rumänien</em></div>
+        <div class="kachel"><span>System</span><strong>Windows 11 Pro</strong><em>Version 25H2 · Build 26200</em></div>
+        <div class="kachel"><span>Speicher gesamt</span><strong>38 TB</strong><em>4 Festplatten</em></div>
+      </div>
+
+      <div class="spalten">
+        <div class="box">
+          <h2>Hardware</h2>
+          <table class="daten">
+            <tbody>
+              <tr><th>Gehäuse</th><td>Fractal Define 7 XL</td></tr>
+              <tr><th>Prozessor</th><td>AMD Ryzen 7 9700X</td></tr>
+              <tr><th>Mainboard</th><td>ASUS TUF Gaming X870-Plus WiFi</td></tr>
+              <tr><th>Arbeitsspeicher</th><td>64 GB DDR5-6000</td></tr>
+              <tr><th>Grafik</th><td>NVIDIA GeForce RTX 4070 Super</td></tr>
+              <tr><th>Systemplatte</th><td>Samsung 990 Pro, 2 TB NVMe</td></tr>
+              <tr><th>Netzwerk</th><td>2,5 GbE, Wi-Fi 7</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="box mitte">
+          <h2>Skizze</h2>
+          <img src="images/rechner.svg" alt="Skizze des Rechners mit vier Festplatten">
+        </div>
+      </div>
+
+      <div class="box">
+        <h2>Festplatten</h2>
+        <table class="daten quer">
+          <thead><tr><th>Laufwerk</th><th>Modell</th><th>Größe</th><th>Inhalt</th><th>Belegt</th></tr></thead>
+          <tbody>
+            <tr><td>D:</td><td>Seagate IronWolf</td><td>12 TB</td><td>Filme</td><td>71 %</td></tr>
+            <tr><td>E:</td><td>Seagate IronWolf</td><td>12 TB</td><td>Serien</td><td>64 %</td></tr>
+            <tr><td>F:</td><td>WD Red Plus</td><td>8 TB</td><td>Musik und Fotos</td><td>38 %</td></tr>
+            <tr><td>G:</td><td>WD Red Plus</td><td>6 TB</td><td>Sicherungen</td><td>52 %</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="box">
+        <h2>Heimnetz</h2>
+        <img class="breit" src="images/netzwerk.svg" alt="Netzwerkplan: Internet, Router, Switch, Rechner, Fernseher, PS5, Scanner und Drucker">
+      </div>
+    </section>
+
+    <!-- Tab 2 -->
+    <section id="server" class="panel" role="tabpanel" hidden>
+      <div class="titelzeile"><h1>Server-Status</h1><span id="server-ampel" class="pille">…</span></div>
+      <div id="auffaellig"></div>
+      <div class="box"><h2>Systeme</h2><div id="systeme"></div></div>
+      <div class="box"><h2>Mediaserver</h2><div id="bereiche"></div></div>
+      <div class="box"><h2>Nebenjobs</h2><div id="jobs"></div></div>
+      <div class="box"><h2>Downloads der letzten 12 Stunden</h2><div id="dl12"></div></div>
+    </section>
+
+    <!-- Tab 3 -->
+    <section id="downloads" class="panel" role="tabpanel" hidden>
+      <div class="titelzeile"><h1>Download-Status</h1></div>
+      <p class="unter" id="dl-kopf"></p>
+      <div class="box"><h2>Film <span id="n-film" class="zahl"></span></h2><div id="dl-film"></div></div>
+      <div class="box"><h2>TV <span id="n-tv" class="zahl"></span></h2><div id="dl-tv"></div></div>
+      <div class="box"><h2>Sonstige Downloads</h2><div id="dl-sonst"></div></div>
+      <div class="box"><h2>Speicher</h2><div id="speicher"></div></div>
+    </section>
+
+  </main>
+
+  <script src="app.js?v=4"></script>
+</body>
+</html>
