@@ -20,6 +20,25 @@ knoepfe.forEach((b) => b.addEventListener("click", () => {
 window.addEventListener("hashchange", () => zeige(location.hash.slice(1)));
 zeige(location.hash.slice(1));
 
+/* ---------- Titel: verschluesselt in status.json, Klartext nur nach Passwort, nur im Speicher ---------- */
+let TITEL = null;   // Kennung -> Name, solange entsperrt
+let PASSWORT = null;
+
+function klar(t) {
+  if (!TITEL || typeof t !== "string") return t;
+  return t.replace(/\S \[\d{3}\]/g, (m) => TITEL[m] || m);
+}
+
+async function entschluesseln(b64, passwort) {
+  const roh = Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
+  const roh_pw = await crypto.subtle.importKey("raw", new TextEncoder().encode(passwort), "PBKDF2", false, ["deriveKey"]);
+  const key = await crypto.subtle.deriveKey(
+    { name: "PBKDF2", salt: roh.slice(0, 16), iterations: 600000, hash: "SHA-256" },
+    roh_pw, { name: "AES-GCM", length: 256 }, false, ["decrypt"]);
+  const klartext = await crypto.subtle.decrypt({ name: "AES-GCM", iv: roh.slice(16, 28) }, key, roh.slice(28));
+  return JSON.parse(new TextDecoder().decode(klartext));
+}
+
 /* ---------- Bausteine: Text immer per textContent, nie als HTML ---------- */
 function el(tag, kl, text) {
   const e = document.createElement(tag);
@@ -49,7 +68,7 @@ function tabelle(kopf, zeilen) {
       const td = r.insertCell();
       const inhalt = zelle && typeof zelle === "object" ? zelle : { t: zelle };
       if (inhalt.knoten) td.appendChild(inhalt.knoten);
-      else td.textContent = inhalt.t === undefined || inhalt.t === null ? "–" : inhalt.t;
+      else td.textContent = inhalt.t === undefined || inhalt.t === null ? "–" : klar(inhalt.t);
       const kl = [];
       if (kopf[i].r) kl.push("r");
       if (kopf[i].titel) kl.push("titel");
@@ -94,7 +113,7 @@ function zeigeServer(s) {
     const h = el("div", "hinweis");
     h.appendChild(el("strong", "", "Auffälligkeiten"));
     const ul = el("ul");
-    s.auffaellig.forEach((x) => ul.appendChild(el("li", "", x)));
+    s.auffaellig.forEach((x) => ul.appendChild(el("li", "", klar(x))));
     h.appendChild(ul);
     box.appendChild(h);
   }
@@ -151,12 +170,18 @@ function zeigeDownloads(d) {
 }
 
 /* ---------- Daten laden ---------- */
+let LETZTE = null;
+
 async function lade() {
   const stand = document.getElementById("stand");
   try {
     const r = await fetch("data/status.json?t=" + Date.now(), { cache: "no-store" });
     if (!r.ok) throw new Error(r.status);
     const d = await r.json();
+    LETZTE = d;
+    if (PASSWORT && d.titel_enc) {
+      try { TITEL = await entschluesseln(d.titel_enc, PASSWORT); } catch (e) { TITEL = null; }
+    }
     zeigeServer(d.server);
     zeigeDownloads(d.downloads);
     const zeit = new Date(d.zeit);
@@ -168,6 +193,53 @@ async function lade() {
     stand.classList.add("alt");
   }
 }
+
+/* ---------- Schloss ---------- */
+const schloss = document.getElementById("schloss");
+
+function neuZeichnen() {
+  if (!LETZTE) return;
+  zeigeServer(LETZTE.server);
+  zeigeDownloads(LETZTE.downloads);
+}
+
+function sperren() {
+  TITEL = null;
+  PASSWORT = null;
+  schloss.textContent = "⚿";
+  schloss.title = "Titel";
+  neuZeichnen();
+}
+
+schloss.addEventListener("click", () => {
+  if (TITEL) { sperren(); return; }
+  if (!LETZTE || !LETZTE.titel_enc) return;
+  const f = document.createElement("input");
+  f.type = "password";
+  f.className = "pw";
+  f.autocomplete = "off";
+  f.setAttribute("aria-label", "Passwort");
+  schloss.replaceWith(f);
+  f.focus();
+  const zurueck = () => { if (f.isConnected) f.replaceWith(schloss); };
+  f.addEventListener("blur", () => setTimeout(zurueck, 150));
+  f.addEventListener("keydown", async (ev) => {
+    if (ev.key === "Escape") { zurueck(); return; }
+    if (ev.key !== "Enter") return;
+    try {
+      TITEL = await entschluesseln(LETZTE.titel_enc, f.value);
+      PASSWORT = f.value;
+      schloss.textContent = "⚿ offen";
+      schloss.title = "wieder sperren";
+      zurueck();
+      neuZeichnen();
+    } catch (e) {
+      f.value = "";
+      f.classList.add("falsch");
+      setTimeout(() => f.classList.remove("falsch"), 700);
+    }
+  });
+});
 
 lade();
 setInterval(lade, NEULADEN_MS);
