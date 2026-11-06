@@ -62,7 +62,7 @@ body {
 
 .stand { color: var(--blass); font-size: .85rem; white-space: nowrap; }
 .stand.alt, .stand .alt { color: var(--warn); }
-.schloss { background: none; border: 0; color: var(--blass); opacity: .35; cursor: pointer; font: inherit; padding: 0 .2rem; }
+.schloss { background: none; border: 0; color: var(--blass); opacity: .85; cursor: pointer; font: inherit; padding: .1rem .5rem; border: 1px solid var(--blass); border-radius: 4px; font-size: .85rem; }
 .schloss:hover { opacity: .9; }
 .pw { width: 7rem; background: transparent; border: 1px solid var(--blass); border-radius: 4px; color: inherit; font: inherit; padding: .1rem .35rem; }
 .pw.falsch { border-color: var(--schlecht); }

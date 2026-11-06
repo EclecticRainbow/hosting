@@ -206,7 +206,7 @@ function neuZeichnen() {
 function sperren() {
   TITEL = null;
   PASSWORT = null;
-  schloss.textContent = "⚿";
+  schloss.textContent = "🔒 Titel";
   schloss.title = "Titel";
   neuZeichnen();
 }
@@ -229,7 +229,7 @@ schloss.addEventListener("click", () => {
     try {
       TITEL = await entschluesseln(LETZTE.titel_enc, f.value);
       PASSWORT = f.value;
-      schloss.textContent = "⚿ offen";
+      schloss.textContent = "🔓 Titel";
       schloss.title = "wieder sperren";
       zurueck();
       neuZeichnen();
